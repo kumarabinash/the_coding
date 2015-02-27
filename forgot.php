@@ -13,18 +13,28 @@ if(isset($_POST['forgot'])){
 	$pass = $_POST['password'];
 	$pass1 = $_POST['conf_password'];
 
-	if($pass == $pass1){
-	$pass = md5($pass1);
-	$query = "UPDATE data SET pass='{$pass}' WHERE email='{$email}' ";
-	$result = mysql_query($query);
-	if (!$result){
-		die('error' . mysql_error());
-	}else{
-		echo "password successfully changed.";
-		?> <a href='login.php'><h2 align="middle">Login</h2></a> <?php
-	}
-	}else{
-		echo "password don't match.";
+	$check = "SELECT id FROM data WHERE email='{$email}' ";
+	$resultcheck = mysql_query($check);
+	if($resultcheck){
+		if(mysql_num_rows($resultcheck) == 1){
+
+			if($pass == $pass1){
+			$pass = md5($pass1);
+			$query = "UPDATE data SET pass='{$pass}' WHERE email='{$email}' ";
+			$result = mysql_query($query);
+			
+			if (!$result){
+				die('error' . mysql_error());
+			}else{
+				echo "password successfully changed.";
+				?> <a href='login.php'><h2 align="middle">Login</h2></a> <?php
+			}
+			}else{
+				echo "password don't match.";
+			}
+		}else{
+			echo "Enter your registered email correctly.";
+		}
 	}
 }
 ?>
