@@ -13,15 +13,25 @@ if(isset($_POST['login'])){
 	$email = $_POST['email'];
 	$pass = md5($_POST['password']);
 
-	$query = "SELECT * FROM data WHERE email = '{$email}' AND pass = '{$pass}' ";
-	$result = mysql_query($query);
-	if(!$result){
-		die ('username or password do not match!!' . mysql_error());
-	}else{
-		$row = mysql_fetch_assoc($result);
-		echo "Hello " . $row['name'];
-		?><a href="logout.php"><h2 align="middle">Logout</h2></a><?php
-	}
+	$check = "SELECT id FROM data WHERE email='{$email}' ";
+	$resultcheck = mysql_query($check);
+
+	if($resultcheck){
+		if(mysql_num_rows($resultcheck) == 1){
+			$query = "SELECT * FROM data WHERE email = '{$email}' AND pass = '{$pass}' ";
+			$result = mysql_query($query);
+			if(!$result){
+				die ('username or password do not match!!' . mysql_error());
+			}else{
+				$row = mysql_fetch_assoc($result);
+				echo "Hello " . $row['name'];
+				?><a href="logout.php"><h2 align="middle">Logout</h2></a><?php
+			}
+		}else{
+			echo "You are not registered with us. Please ";?><a href="signup.php" style=" text-decoration: none">Signup</a>
+			<?php echo " to continue.";
+		}
+	}	
 }
 ?>
 <form method='post' action='login.php'>
