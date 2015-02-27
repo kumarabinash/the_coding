@@ -1,4 +1,4 @@
-CREATE TABLE `electricals_tbl`(
+CREATE TABLE `data`(
 	id INT(11) AUTO_INCREMENT NOT NULL,
 	name VARCHAR(30),
 	email VARCHAR(50),
