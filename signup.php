@@ -7,7 +7,8 @@
 </head>
 <body>
 <a href="home.php"><h2 align="middle">HOME</h2></a>
-<?php 
+<?php
+
 	if(isset($_POST['signup'])){
 		$name = $_POST['name'];
 		$email = $_POST['email'];
@@ -15,18 +16,27 @@
 		$pass = $_POST['password'];
 		$pass1 = $_POST['conf_password'];
 		
-		if($pass == $pass1){
-			$pass = md5($pass1);
-			$query = "INSERT INTO data(name, email, mobno, pass)VALUES('{$name}', '{$email}', '{$mobno}', '{$pass}')";
-			$result = mysql_query($query);
-			if(!$result){
-				die ('Could not inserted to table.' . mysql_error());
-			} else{
-				echo "inserted to table.";
-				?> <a href='login.php'><h2 align="middle">Login</h2></a> <?php
+		$check = "SELECT id FROM data WHERE email='{$email}' ";
+		$resultcheck = mysql_query($check);
+
+		if($resultcheck){
+			if(mysql_num_rows($resultcheck) == 1){
+				header("Location:home.php?registered=1&email='{$email}'");
+			}else{
+				if($pass == $pass1){
+					$pass = md5($pass1);
+					$query = "INSERT INTO data(name, email, mobno, pass)VALUES('{$name}', '{$email}', '{$mobno}', '{$pass}')";
+					$result = mysql_query($query);
+					if(!$result){
+						die ('Could not inserted to table.' . mysql_error());
+					}else{
+						echo "inserted to table.";
+						?> <a href='login.php'><h2 align="middle">Login</h2></a> <?php
+					}
+				}else{
+					echo "password don't match.";
+				}
 			}
-		}else{
-			echo "password don't match.";
 		}
 	}
 ?>
