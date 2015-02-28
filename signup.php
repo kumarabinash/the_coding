@@ -1,4 +1,3 @@
-<?php require 'connection.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +7,7 @@
 	<script type="text/javascript" src="dist/js/kickstart.js"></script>
 </head>
 <body>
+<?php require "connection.php" ?>
 <div class="container">
 	<a href="home.php"><h2 align="middle">HOME</h2></a>
 	<?php
