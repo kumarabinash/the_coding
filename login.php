@@ -32,7 +32,7 @@
 							k$.growl({
 							  text: 'Logged in Successfully!',
 							  type: 'status-green',
-							  delaty: 3000
+							  delay: 3000
 							});
 						</script>
 
