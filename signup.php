@@ -24,7 +24,9 @@
 
 			if($resultcheck){
 				if(mysql_num_rows($resultcheck) == 1){
+					echo "email='{$email}'" . "alredy registered with us, please login to continue.";
 					header("Location:home.php?registered=1&email='{$email}'");
+
 				}else{
 					if($pass == $pass1){
 						$pass = md5($pass1);
@@ -33,7 +35,16 @@
 						if(!$result){
 							die ('Could not inserted to table.' . mysql_error());
 						}else{
-							echo "
+							$signin = "SELECT*FROM data WHERE email='{$email}'";
+							$resultsignin = mysql_query($signin);
+							if($resultsignin){
+								$record = mysql_fetch_assoc($resultsignin);
+								$_SESSION['userid'] = $_record['id'];
+								$_SESSION['username'] = $_record['name'];
+								$_SESSION['useremail'] = $_record['email'];
+								$_SESSION['usermobno'] = $_record['mobno'];
+								header("Location:home.php?registered=1");
+								echo "
 							<script>
 								k$.growl({
 								  text: 'Registered Successfully!',
@@ -44,6 +55,7 @@
 
 							";
 							?> <a href='login.php'><h2 align="middle">Login</h2></a> <?php
+							}
 						}
 					}else{
 						echo "password don't match.";
