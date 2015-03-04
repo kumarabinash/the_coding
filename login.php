@@ -23,16 +23,17 @@
 			if(mysql_num_rows($resultcheck) == 1){
 				$query = "SELECT * FROM data WHERE email = '{$email}' AND pass = '{$pass}' ";
 				$result = mysql_query($query);
-				if(!$result){
+				if(!mysql_num_rows($result) == 1){
 					die ('username or password do not match!!' . mysql_error());
 				}else{
 					$row = mysql_fetch_assoc($result);
-					// explain the following part and use of "_". I know $_SESSION(same as $_POST) but why $_row.
-					$_SESSION['userid'] = $_row['id'];
-					$_SESSION['username'] = $_row['name'];
-					$_SESSION['useremail'] = $_row['email'];
-					$_SESSION['usermobno'] = $_row['mobno'];
-					header("Location:home.php?login=1");
+					// session_start();
+					$_SESSION['userid'] = $row['id'];
+					$_SESSION['username'] = $row['name'];
+					$_SESSION['useremail'] = $row['email'];
+					$_SESSION['usermobno'] = $row['mobno'];
+					$_SESSION['msg'] = "message"; //testing
+					// header("Location:index.php?login=1"); //	WHAT DO YOU MEAN BY ?login=1 ?
 					echo "
 						<script>
 							k$.growl({
@@ -43,7 +44,7 @@
 						</script>
 
 					";
-					echo "Hello " . $row['name'] ." ". "{$_SESSION['useremail']}" ." ". $row['mobno'];
+					echo "Hello " . $row['name'] ." :: ". "{$_SESSION['useremail']}" ." ::  ". $row['mobno'];
 					?><a href="logout.php"><h2 align="middle">Logout</h2></a><?php
 				}
 			}else{
