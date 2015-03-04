@@ -24,8 +24,10 @@
 
 			if($resultcheck){
 				if(mysql_num_rows($resultcheck) == 1){
-					echo "email='{$email}'" . "alredy registered with us, please login to continue.";
-					header("Location:home.php?registered=1&email='{$email}'");
+					echo "email='{$email}'" . " alredy registered with us, please login to continue.";
+					// 	HOW TO SHOW MESSAGES IN home.php AFTER SIGNING IN. I CAN CHANGE THE "Location: login.php" BUT HOW TO REDIRECT TO HOME.PHP AND SHOW THINGS
+					// UNABLE TO UNDERSTAND FROM foodx
+					// header("Location:home.php?registered=1&email='{$email}'");
 
 				}else{
 					if($pass == $pass1){
@@ -39,10 +41,10 @@
 							$resultsignin = mysql_query($signin);
 							if($resultsignin){
 								$record = mysql_fetch_assoc($resultsignin);
-								$_SESSION['userid'] = $_record['id'];
-								$_SESSION['username'] = $_record['name'];
-								$_SESSION['useremail'] = $_record['email'];
-								$_SESSION['usermobno'] = $_record['mobno'];
+								$_SESSION['userid'] = $record['id'];
+								$_SESSION['username'] = $record['name'];
+								$_SESSION['useremail'] = $record['email'];
+								$_SESSION['usermobno'] = $record['mobno'];
 								header("Location:home.php?registered=1");
 								echo "
 							<script>
