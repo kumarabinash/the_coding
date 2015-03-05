@@ -7,8 +7,11 @@
 	<script type="text/javascript" src="dist/js/kickstart.js"></script>
 </head>
 <body>
-<?php require "connection.php" ?>
-<div class="container">
+<?php require "connection.php"; ?>
+<?php include "includes/navbar.php"; ?>
+<div class="container main">
+<section class="row">
+	<div class="col-left-1 col-10">
 	<h2>Login</h2>
 	<a href="home.php"><h2 align="middle">HOME</h2></a>
 	<?php 
@@ -24,7 +27,16 @@
 				$query = "SELECT * FROM data WHERE email = '{$email}' AND pass = '{$pass}' ";
 				$result = mysql_query($query);
 				if(!mysql_num_rows($result) == 1){
-					die ('username or password do not match!!' . mysql_error());
+					echo "
+					 	<script>
+					 		k$.growl({
+					 		  text: 'Invalid username or password!',
+					 		  type: 'status-red',
+					 		  delay: 3000
+					 		});
+					 	</script>
+					 ";
+					 echo mysql_error();
 				}else{
 					$row = mysql_fetch_assoc($result);
 					// session_start();
@@ -33,19 +45,27 @@
 					$_SESSION['useremail'] = $row['email'];
 					$_SESSION['usermobno'] = $row['mobno'];
 					$_SESSION['msg'] = "message"; //testing
-					// header("Location:index.php?login=1"); //	WHAT DO YOU MEAN BY ?login=1 ?
-					echo "
-						<script>
-							k$.growl({
-							  text: 'Logged in Successfully!',
-							  type: 'status-green',
-							  delay: 3000
-							});
-						</script>
+					// echo "test;";
+					header("Location:home.php?login=1"); //	WHAT DO YOU MEAN BY ?login=1 
+					/*
+					* Here the ?login=1 is a parameter passed into home as a get variable
+					* the codes are being checked in home.php as $_GET['login']
+					*/
 
-					";
-					echo "Hello " . $row['name'] ." :: ". "{$_SESSION['useremail']}" ." ::  ". $row['mobno'];
-					?><a href="logout.php"><h2 align="middle">Logout</h2></a><?php
+
+					//NEXT BUNCH OF LINES ARE BEING REMOVED IN THE NEXT RELEASE!!
+					// echo "
+					// 	<script>
+					// 		k$.growl({
+					// 		  text: 'Logged in Successfully!',
+					// 		  type: 'status-green',
+					// 		  delay: 3000
+					// 		});
+					// 	</script>
+
+					// ";
+					// echo "Hello " . $row['name'] ." :: ". "{$_SESSION['useremail']}" ." ::  ". $row['mobno'];
+				
 				}
 			}else{
 				echo "
@@ -82,6 +102,8 @@
 			</tr>
 		</table>
 	</form>
+	</div>
+	</section>
 </div>
 </body>
 </html>
