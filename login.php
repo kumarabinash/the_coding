@@ -86,6 +86,19 @@
 			}
 		}	
 	}
+	if(isset($_GET['forgot'])){
+		if($_GET['forgot'] == 1){
+			echo "
+				<script>
+					k$.growl({
+						text: 'Password changed. Please Login to enter.',
+						type: 'status-green',
+						delay: 3000
+					});
+				</script>
+			";
+		}
+	}
 	?>
 	<form method='post' action='login.php'>
 		<table>

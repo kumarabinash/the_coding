@@ -31,7 +31,8 @@
 									if (!$result){
 											die('error' . mysql_error());
 									}else{
-											echo "password successfully changed.";
+											// echo "password successfully changed.";
+											header("Location:login.php?forgot=1");
 									}
 								}else{
 									echo "password don't match.";
