@@ -2,7 +2,7 @@
   <nav>
     <ul>
       <li class="navbar-title">
-        <a href="/">Home</a>
+        <a href="home.php">Home</a>
       </li>
     </ul>
     <ul>
