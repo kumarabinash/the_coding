@@ -24,7 +24,9 @@
 				$query = "SELECT * FROM data WHERE email = '{$email}' AND pass = '{$pass}' ";
 				$result = mysql_query($query);
 				if(!mysql_num_rows($result) == 1){
-					die ('username or password do not match!!' . mysql_error());
+					// header("Location:login.php");
+					// http_redirect('login.php');
+					die ('Password do not match!!' . mysql_error());
 				}else{
 					$row = mysql_fetch_assoc($result);
 					// session_start();
