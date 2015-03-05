@@ -29,5 +29,33 @@
 	</div>
 </section>
 </div>
+<?php 
+if(isset($_GET['login'])){
+	if($_GET['login'] == 1){
+		echo "
+		 	<script>
+		 		k$.status({
+		 		  text: 'Logged in successfully!',
+		 		  type: 'status-green',
+		 		  delay: 3000
+		 		});
+		 	</script>
+		 ";
+	}
+} elseif (isset($_GET['registered'])){
+	if($_GET['registered'] == 1){
+		echo "
+		 	<script>
+		 		k$.status({
+		 		  text: 'Successfully registered with us!',
+		 		  type: 'status-green',
+		 		  delay: 3000
+		 		});
+		 	</script>
+		 ";
+	}
+}
+
+ ?>
 </body>
 </html>
