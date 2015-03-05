@@ -12,9 +12,7 @@
 <div class="container main">
 <section class="row">
 	<div class="col-left-1 col-10">
-	<a href="home.php"><h2 align="middle">HOME</h2></a>
 	<?php
-
 		if(isset($_POST['signup'])){
 			$name = $_POST['name'];
 			$email = $_POST['email'];
@@ -68,7 +66,8 @@
 		}
 	?>
 	<h2>Signup</h2>
-	<p>Don't have a account. Create it in just few steps.</p>
+	<par>Don't have an account. Create it in just few steps.</par>
+	<p></p>
 	<form method="post" action="signup.php">
 		<table>
 			<tr>

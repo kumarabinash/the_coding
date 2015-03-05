@@ -13,7 +13,6 @@
 <section class="row">
 	<div class="col-left-1 col-10">
 	<h2>Login</h2>
-	<a href="home.php"><h2 align="middle">HOME</h2></a>
 	<?php 
 	if(isset($_POST['login'])){
 		$email = $_POST['email'];
@@ -27,11 +26,11 @@
 				$query = "SELECT * FROM data WHERE email = '{$email}' AND pass = '{$pass}' ";
 				$result = mysql_query($query);
 				if(!mysql_num_rows($result) == 1){
-<<<<<<< HEAD
+// <<<<<<< HEAD
 					// header("Location:login.php");
 					// http_redirect('login.php');
-					die ('Password do not match!!' . mysql_error());
-=======
+					// die ('Password do not match!!' . mysql_error());
+// =======
 					echo "
 					 	<script>
 					 		k$.growl({
@@ -42,7 +41,7 @@
 					 	</script>
 					 ";
 					 echo mysql_error();
->>>>>>> da0a9525bc14d333a916a3c691cd95bd75b86c6f
+// >>>>>>> da0a9525bc14d333a916a3c691cd95bd75b86c6f
 				}else{
 					$row = mysql_fetch_assoc($result);
 					// session_start();
@@ -50,7 +49,7 @@
 					$_SESSION['username'] = $row['name'];
 					$_SESSION['useremail'] = $row['email'];
 					$_SESSION['usermobno'] = $row['mobno'];
-					$_SESSION['msg'] = "message"; //testing
+					// $_SESSION['msg'] = "message"; //testing
 					// echo "test;";
 					header("Location:home.php?login=1"); //	WHAT DO YOU MEAN BY ?login=1 
 					/*
