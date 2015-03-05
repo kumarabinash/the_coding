@@ -8,7 +8,10 @@
 </head>
 <body>
 <?php require "connection.php" ?>
-<div class="container">
+<?php include "includes/navbar.php" ?>
+<div class="container main">
+<section class="row">
+	<div class="col-left-1 col-10">
 	<a href="home.php"><h2 align="middle">HOME</h2></a>
 	<?php
 
@@ -46,21 +49,19 @@
 								$_SESSION['useremail'] = $record['email'];
 								$_SESSION['usermobno'] = $record['mobno'];
 								header("Location:home.php?registered=1");
-								echo "
+							}
+						}
+					} else {
+						echo "
 							<script>
-								k$.growl({
-								  text: 'Registered Successfully!',
-								  type: 'status-green',
-								  delay: 0
+								k$.status({
+								  text: 'Both Passwords doesnt match!',
+								  type: 'status-red',
+								  delay: 3000
 								});
 							</script>
 
-							";
-							?> <a href='login.php'><h2 align="middle">Login</h2></a> <?php
-							}
-						}
-					}else{
-						echo "password don't match.";
+						";
 					}
 				}
 			}
@@ -96,6 +97,8 @@
 			</tr>
 		</table>
 	</form>
+	</div>
+	</section>
 </div>
 </body>
 </html>
